@@ -1,0 +1,46 @@
+#!/bin/sh
+
+case "${1}" in
+	pkg)
+		env ASSUME_ALWAYS_YES=yes SIGNATURE_TYPE=none IGNORE_OSVERSION=yes pkg bootstrap -r FreeBSD
+		ret=$?
+		;;
+	freebsd)
+		env ASSUME_ALWAYS_YES=yes SIGNATURE_TYPE=none IGNORE_OSVERSION=yes pkg bootstrap -r FreeBSD
+		env ASSUME_ALWAYS_YES=yes SIGNATURE_TYPE=none IGNORE_OSVERSION=yes pkg install -r CBSD-base-in-pkg -y FreeBSD-bsdinstall FreeBSD-geom FreeBSD-utilities FreeBSD-fetch
+		hash -r
+		netkldload geom_part_bsd.ko
+		netkldload geom_part_bsd64.ko
+		netkldload geom_part_gpt.ko
+		netkldload geom_part_mbr.ko
+		bsdinstall
+		echo "Type 'reboot' to reboot host"
+		;;
+	clonos)
+		echo "unimplemented yet"
+		;;
+	mybee)
+		env ASSUME_ALWAYS_YES=yes SIGNATURE_TYPE=none IGNORE_OSVERSION=yes pkg bootstrap -r FreeBSD
+		env ASSUME_ALWAYS_YES=yes SIGNATURE_TYPE=none IGNORE_OSVERSION=yes pkg install -r CBSD-base-in-pkg -y FreeBSD-bsdinstall FreeBSD-geom FreeBSD-utilities FreeBSD-fetch
+		cd /tmp
+		hash -r
+		netkldload geom_part_bsd.ko
+		netkldload geom_part_bsd64.ko
+		netkldload geom_part_gpt.ko
+		netkldload geom_part_mbr.ko
+		fetch https://myb.convectix.com/auto
+		/bin/sh /tmp/auto
+		echo "Type 'reboot' to reboot host"
+		;;
+	bhyve|cbsd|attach|add)
+		echo "unimplemented yet"
+		;;
+	fio)
+		env ASSUME_ALWAYS_YES=yes SIGNATURE_TYPE=none IGNORE_OSVERSION=yes pkg bootstrap -r FreeBSD
+		env ASSUME_ALWAYS_YES=yes SIGNATURE_TYPE=none IGNORE_OSVERSION=yes pkg install -r CBSD-base-in-pkg -y spacevm-sendfio FreeBSD-utilities FreeBSD-kerberos-lib FreeBSD-openssl
+		hash -r
+		echo "Type 'spacevm-perf-fio-run' to run interactive 'fio' benchmark script"
+		;;
+esac
+
+exit ${ret}

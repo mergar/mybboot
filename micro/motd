@@ -1,0 +1,26 @@
+Welcome to BSDBoot Image, the memory based BSD distribution.
+------------------------------------------------------------
+
+1) To install MyBee (FreeBSD-based appliance for virtual env (jail/bhyve)), please type:
+
+  fetch https://myb.convectix.com/auto
+  sh auto
+
+2) To install ClonOS (FreeBSD-based appliance for virtual env (jail/bhyve) via WEB UI), please type:
+
+  fetch https://clonos.convectix.com/auto
+  sh auto
+
+3) To install vanilla FreeBSD 14.0-RELEASE, please type:
+
+  bsdinstall
+
+*** Another possibilites: ***
+
+You can expand and customize this image yourself, gaining new opportunities. 
+Other official extensions:
+
+'bsdboot bhyve'  - Fetch & enable bhyve hypervisor module
+'bsdboot cbsd'   - Fetch & Enable 'CBSD' module
+'bsdboot attach' - Attach network disk
+'bsdboot add'    - Add remote CBSDBoot node

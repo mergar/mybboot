@@ -1,0 +1,312 @@
+#!/bin/sh
+pgm="${0##*/}"		# Program basename
+progdir="${0%/*}"	# Program directory
+
+jailed=$( /sbin/sysctl -qn security.jail.jailed )
+full_packages="pkg0 pkg1 pkg2 pkg3 pkg4 pkg5 pkg6 pkg7 pkg8 pkg9 pkg10 pkg11 pkg12 pkg13 pkg14 pkg15 pkg16 pkg17 pkg18 pkg19 pkg20 pkg21 pkg22 pkg23 pkg24 pkg25 pkg26 pkg27 pkg28 pkg29 pkg30 pkg31 pkg32 pkg33 pkg34 pkg35 pkg36 pkg37 pkg38 pkg39 pkg40 pkg41 pkg42 pkg43 pkg44 pkg45 pkg46 pkg47 pkg48 pkg49 pkg50 pkg51 pkg52 pkg53 pkg54 pkg55 pkg56 pkg57 pkg58 pkg59 pkg60 pkg61 pkg62 pkg63 pkg64 pkg65 pkg66 pkg67 pkg68 pkg69 pkg70 pkg71 pkg72 pkg73 pkg74 pkg75 pkg76 pkg77"
+pkg0_path="/usr/bin/last /usr/bin/lastcomm /usr/bin/users /usr/bin/who /usr/sbin/ac /usr/sbin/accton /usr/sbin/lastlogin /usr/sbin/sa /usr/sbin/utx"
+pkg0_name="FreeBSD-acct"
+pkg0="last lastcomm users who ac accton lastlogin sa utx"
+pkg1_path="/usr/sbin/acpiconf /usr/sbin/acpidb /usr/sbin/acpidump /usr/sbin/iasl"
+pkg1_name="FreeBSD-acpi"
+pkg1="acpiconf acpidb acpidump iasl"
+pkg2_path="/usr/sbin/apm"
+pkg2_name="FreeBSD-apm"
+pkg2="apm"
+pkg3_path="/usr/bin/at /usr/bin/atq /usr/bin/atrm /usr/bin/batch /usr/libexec/atrun"
+pkg3_name="FreeBSD-at"
+pkg3="at atq atrm batch atrun"
+pkg4_path="/usr/sbin/automount /usr/sbin/automountd /usr/sbin/autounmountd"
+pkg4_name="FreeBSD-autofs"
+pkg4="automount automountd autounmountd"
+pkg5_path="/usr/sbin/bhyve /usr/sbin/bhyvectl /usr/sbin/bhyveload"
+pkg5_name="FreeBSD-bhyve"
+pkg5="bhyve bhyvectl bhyveload"
+pkg6_path="/usr/bin/bthost /usr/bin/btsockstat /usr/bin/rfcomm_sppd /usr/sbin/ath3kfw /usr/sbin/bcmfw /usr/sbin/bluetooth-config /usr/sbin/bthidcontrol /usr/sbin/bthidd /usr/sbin/btpand /usr/sbin/hccontrol /usr/sbin/hcsecd /usr/sbin/iwmbtfw /usr/sbin/l2control /usr/sbin/l2ping /usr/sbin/rfcomm_pppd /usr/sbin/sdpcontrol /usr/sbin/sdpd"
+pkg6_name="FreeBSD-bluetooth"
+pkg6="bthost btsockstat rfcomm_sppd ath3kfw bcmfw bluetooth-config bthidcontrol bthidd btpand hccontrol hcsecd iwmbtfw l2control l2ping rfcomm_pppd sdpcontrol sdpd"
+pkg7_path="/usr/libexec/bsdinstall/adduser /usr/libexec/bsdinstall/auto /usr/libexec/bsdinstall/autopart /usr/libexec/bsdinstall/bootconfig /usr/libexec/bsdinstall/checksum /usr/libexec/bsdinstall/config /usr/libexec/bsdinstall/distextract /usr/libexec/bsdinstall/distfetch /usr/libexec/bsdinstall/docsinstall /usr/libexec/bsdinstall/entropy /usr/libexec/bsdinstall/fetchmissingdists /usr/libexec/bsdinstall/hardening /usr/libexec/bsdinstall/hostname /usr/libexec/bsdinstall/jail /usr/libexec/bsdinstall/keymap /usr/libexec/bsdinstall/mirrorselect /usr/libexec/bsdinstall/mount /usr/libexec/bsdinstall/netconfig /usr/libexec/bsdinstall/netconfig_ipv4 /usr/libexec/bsdinstall/netconfig_ipv6 /usr/libexec/bsdinstall/partedit /usr/libexec/bsdinstall/rootpass /usr/libexec/bsdinstall/runconsoles /usr/libexec/bsdinstall/script /usr/libexec/bsdinstall/scriptedpart /usr/libexec/bsdinstall/services /usr/libexec/bsdinstall/startbsdinstall /usr/libexec/bsdinstall/time /usr/libexec/bsdinstall/umount /usr/libexec/bsdinstall/wlanconfig /usr/libexec/bsdinstall/zfsboot /usr/sbin/bsdinstall /usr/sbin/sade"
+pkg7_name="FreeBSD-bsdinstall"
+pkg7="adduser auto autopart bootconfig checksum config distextract distfetch docsinstall entropy fetchmissingdists hardening hostname jail keymap mirrorselect mount netconfig netconfig_ipv4 netconfig_ipv6 partedit rootpass runconsoles script scriptedpart services startbsdinstall time umount wlanconfig zfsboot bsdinstall sade"
+pkg8_path="/usr/bin/bsnmpget /usr/bin/bsnmpset /usr/bin/bsnmpwalk /usr/sbin/bsnmpd /usr/sbin/gensnmptree"
+pkg8_name="FreeBSD-bsnmp"
+pkg8="bsnmpget bsnmpset bsnmpwalk bsnmpd gensnmptree"
+pkg9_path="/usr/sbin/certctl"
+pkg9_name="FreeBSD-caroot"
+pkg9="certctl"
+pkg10_path="/sbin/ccdconfig"
+pkg10_name="FreeBSD-ccdconfig"
+pkg10="ccdconfig"
+pkg11_path="/usr/bin/CC /usr/bin/c++ /usr/bin/c++filt /usr/bin/cc /usr/bin/clang /usr/bin/clang++ /usr/bin/clang-cpp /usr/bin/cpp /usr/bin/gcov /usr/bin/llvm-addr2line /usr/bin/llvm-ar /usr/bin/llvm-cov /usr/bin/llvm-cxxfilt /usr/bin/llvm-nm /usr/bin/llvm-objcopy /usr/bin/llvm-objdump /usr/bin/llvm-profdata /usr/bin/llvm-ranlib /usr/bin/llvm-readelf /usr/bin/llvm-readobj /usr/bin/llvm-size /usr/bin/llvm-strings /usr/bin/llvm-strip /usr/bin/llvm-symbolizer /usr/bin/objdump"
+pkg11_name="FreeBSD-clang"
+pkg11="CC c++ c++filt cc clang clang++ clang-cpp cpp gcov llvm-addr2line llvm-ar llvm-cov llvm-cxxfilt llvm-nm llvm-objcopy llvm-objdump llvm-profdata llvm-ranlib llvm-readelf llvm-readobj llvm-size llvm-strings llvm-strip llvm-symbolizer objdump"
+pkg12_path="/usr/libexec/ld-elf32.so.1"
+pkg12_name="FreeBSD-clibs-lib32"
+pkg12="ld-elf32.so.1"
+pkg13_path="/usr/libexec/ld-elf.so.1"
+pkg13_name="FreeBSD-clibs"
+pkg13="ld-elf.so.1"
+pkg14_path="/usr/sbin/kbdcontrol /usr/sbin/kbdmap /usr/sbin/moused /usr/sbin/vidcontrol /usr/sbin/vidfont"
+pkg14_name="FreeBSD-console-tools"
+pkg14="kbdcontrol kbdmap moused vidcontrol vidfont"
+pkg15_path="/bin/csh /bin/tcsh"
+pkg15_name="FreeBSD-csh"
+pkg15="csh tcsh"
+pkg16_path="/usr/bin/ctfconvert /usr/bin/ctfdump /usr/bin/ctfmerge"
+pkg16_name="FreeBSD-ctf-tools"
+pkg16="ctfconvert ctfdump ctfmerge"
+pkg17_path="/usr/sbin/cxgbetool"
+pkg17_name="FreeBSD-cxgbe-tools"
+pkg17="cxgbetool"
+pkg18_path="/sbin/devd"
+pkg18_name="FreeBSD-devd"
+pkg18="devd"
+pkg19_path="/sbin/devmatch /usr/sbin/devinfo"
+pkg19_name="FreeBSD-devmatch"
+pkg19="devmatch devinfo"
+pkg20_path="/sbin/dhclient /sbin/dhclient-script"
+pkg20_name="FreeBSD-dhclient"
+pkg20="dhclient dhclient-script"
+pkg21_path="/usr/libexec/dma /usr/libexec/dma-mbox-create"
+pkg21_name="FreeBSD-dma"
+pkg21="dma dma-mbox-create"
+pkg22_path="/usr/bin/dpv"
+pkg22_name="FreeBSD-dpv"
+pkg22="dpv"
+pkg23_path="/usr/sbin/dtrace /usr/sbin/lockstat /usr/sbin/plockstat"
+pkg23_name="FreeBSD-dtrace"
+pkg23="dtrace lockstat plockstat"
+pkg24_path="/usr/libexec/dwatch/chmod /usr/libexec/dwatch/errno /usr/libexec/dwatch/fchmodat /usr/libexec/dwatch/io /usr/libexec/dwatch/io-done /usr/libexec/dwatch/io-start /usr/libexec/dwatch/ip /usr/libexec/dwatch/ip-receive /usr/libexec/dwatch/ip-send /usr/libexec/dwatch/kill /usr/libexec/dwatch/lchmod /usr/libexec/dwatch/nanosleep /usr/libexec/dwatch/open /usr/libexec/dwatch/openat /usr/libexec/dwatch/proc /usr/libexec/dwatch/proc-create /usr/libexec/dwatch/proc-exec /usr/libexec/dwatch/proc-exec-failure /usr/libexec/dwatch/proc-exec-success /usr/libexec/dwatch/proc-exit /usr/libexec/dwatch/proc-signal /usr/libexec/dwatch/proc-signal-clear /usr/libexec/dwatch/proc-signal-discard /usr/libexec/dwatch/proc-signal-send /usr/libexec/dwatch/proc-status /usr/libexec/dwatch/read /usr/libexec/dwatch/recv /usr/libexec/dwatch/recvfrom /usr/libexec/dwatch/recvmsg /usr/libexec/dwatch/rw /usr/libexec/dwatch/sched /usr/libexec/dwatch/sched-change-pri /usr/libexec/dwatch/sched-cpu /usr/libexec/dwatch/sched-dequeue /usr/libexec/dwatch/sched-enqueue /usr/libexec/dwatch/sched-exec /usr/libexec/dwatch/sched-lend-pri /usr/libexec/dwatch/sched-load-change /usr/libexec/dwatch/sched-off-cpu /usr/libexec/dwatch/sched-on-cpu /usr/libexec/dwatch/sched-preempt /usr/libexec/dwatch/sched-pri /usr/libexec/dwatch/sched-queue /usr/libexec/dwatch/sched-remain-cpu /usr/libexec/dwatch/sched-sleep /usr/libexec/dwatch/sched-surrender /usr/libexec/dwatch/sched-tick /usr/libexec/dwatch/sched-wakeup /usr/libexec/dwatch/send /usr/libexec/dwatch/sendmsg /usr/libexec/dwatch/sendrecv /usr/libexec/dwatch/sendto /usr/libexec/dwatch/systop /usr/libexec/dwatch/tcp /usr/libexec/dwatch/tcp-accept /usr/libexec/dwatch/tcp-accept-established /usr/libexec/dwatch/tcp-accept-refused /usr/libexec/dwatch/tcp-connect /usr/libexec/dwatch/tcp-connect-established /usr/libexec/dwatch/tcp-connect-refused /usr/libexec/dwatch/tcp-connect-request /usr/libexec/dwatch/tcp-established /usr/libexec/dwatch/tcp-init /usr/libexec/dwatch/tcp-io /usr/libexec/dwatch/tcp-receive /usr/libexec/dwatch/tcp-refused /usr/libexec/dwatch/tcp-send /usr/libexec/dwatch/tcp-state-change /usr/libexec/dwatch/tcp-status /usr/libexec/dwatch/udp /usr/libexec/dwatch/udp-receive /usr/libexec/dwatch/udp-send /usr/libexec/dwatch/udplite /usr/libexec/dwatch/udplite-receive /usr/libexec/dwatch/udplite-send /usr/libexec/dwatch/vop_create /usr/libexec/dwatch/vop_lookup /usr/libexec/dwatch/vop_mkdir /usr/libexec/dwatch/vop_mknod /usr/libexec/dwatch/vop_readdir /usr/libexec/dwatch/vop_remove /usr/libexec/dwatch/vop_rename /usr/libexec/dwatch/vop_rmdir /usr/libexec/dwatch/vop_symlink /usr/libexec/dwatch/write /usr/sbin/dwatch"
+pkg24_name="FreeBSD-dwatch"
+pkg24="chmod errno fchmodat io io-done io-start ip ip-receive ip-send kill lchmod nanosleep open openat proc proc-create proc-exec proc-exec-failure proc-exec-success proc-exit proc-signal proc-signal-clear proc-signal-discard proc-signal-send proc-status read recv recvfrom recvmsg rw sched sched-change-pri sched-cpu sched-dequeue sched-enqueue sched-exec sched-lend-pri sched-load-change sched-off-cpu sched-on-cpu sched-preempt sched-pri sched-queue sched-remain-cpu sched-sleep sched-surrender sched-tick sched-wakeup send sendmsg sendrecv sendto systop tcp tcp-accept tcp-accept-established tcp-accept-refused tcp-connect tcp-connect-established tcp-connect-refused tcp-connect-request tcp-established tcp-init tcp-io tcp-receive tcp-refused tcp-send tcp-state-change tcp-status udp udp-receive udp-send udplite udplite-receive udplite-send vop_create vop_lookup vop_mkdir vop_mknod vop_readdir vop_remove vop_rename vop_rmdir vop_symlink write dwatch"
+pkg25_path="/usr/bin/edit /usr/bin/ee /usr/bin/ree"
+pkg25_name="FreeBSD-ee"
+pkg25="edit ee ree"
+pkg26_path="/usr/sbin/efibootmgr /usr/sbin/efidp /usr/sbin/efitable /usr/sbin/efivar /usr/sbin/efiwake"
+pkg26_name="FreeBSD-efi-tools"
+pkg26="efibootmgr efidp efitable efivar efiwake"
+pkg27_path="/usr/bin/addr2line /usr/bin/nm /usr/bin/objcopy /usr/bin/readelf /usr/bin/size /usr/bin/strip"
+pkg27_name="FreeBSD-elftoolchain"
+pkg27="addr2line nm objcopy readelf size strip"
+pkg28_path="/usr/bin/fetch"
+pkg28_name="FreeBSD-fetch"
+pkg28="fetch"
+pkg29_path="/usr/bin/ftp /usr/bin/gate-ftp /usr/bin/pftp"
+pkg29_name="FreeBSD-ftp"
+pkg29="ftp gate-ftp pftp"
+pkg30_path="/usr/libexec/ftpd"
+pkg30_name="FreeBSD-ftpd"
+pkg30="ftpd"
+pkg31_path="/usr/libexec/fwget/pci /usr/libexec/fwget/pci_network_mediatek /usr/libexec/fwget/pci_network_qca /usr/libexec/fwget/pci_network_realtek /usr/libexec/fwget/pci_video_amd /usr/libexec/fwget/pci_video_intel /usr/sbin/fwget"
+pkg31_name="FreeBSD-fwget"
+pkg31="pci pci_network_mediatek pci_network_qca pci_network_realtek pci_video_amd pci_video_intel fwget"
+pkg32_path="/usr/bin/caesar /usr/bin/grdc /usr/bin/pom /usr/bin/rot13"
+pkg32_name="FreeBSD-games"
+pkg32="caesar grdc pom rot13"
+pkg33_path="/sbin/gbde /sbin/gcache /sbin/gconcat /sbin/geli /sbin/geom /sbin/gjournal /sbin/glabel /sbin/gmirror /sbin/gmountver /sbin/gmultipath /sbin/gnop /sbin/gpart /sbin/graid /sbin/graid3 /sbin/gshsec /sbin/gstripe /sbin/gunion /sbin/gvinum /sbin/gvirstor"
+pkg33_name="FreeBSD-geom"
+pkg33="gbde gcache gconcat geli geom gjournal glabel gmirror gmountver gmultipath gnop gpart graid graid3 gshsec gstripe gunion gvinum gvirstor"
+pkg34_path="/sbin/ggatec /sbin/ggated /sbin/ggatel"
+pkg34_name="FreeBSD-ggate"
+pkg34="ggatec ggated ggatel"
+pkg35_path="/sbin/hastctl /sbin/hastd"
+pkg35_name="FreeBSD-hast"
+pkg35="hastctl hastd"
+pkg36_path="/usr/sbin/hostapd /usr/sbin/hostapd_cli"
+pkg36_name="FreeBSD-hostapd"
+pkg36="hostapd hostapd_cli"
+pkg37_path="/usr/libexec/hyperv/hv_get_dhcp_info /usr/libexec/hyperv/hv_get_dns_info /usr/libexec/hyperv/hv_set_ifconfig /usr/libexec/hyperv/hyperv_vfattach /usr/libexec/hyperv/hyperv_vfup"
+pkg37_name="FreeBSD-hyperv-tools"
+pkg37="hv_get_dhcp_info hv_get_dns_info hv_set_ifconfig hyperv_vfattach hyperv_vfup"
+pkg38_path="/usr/sbin/inetd"
+pkg38_name="FreeBSD-inetd"
+pkg38="inetd"
+pkg39_path="/sbin/ipf /sbin/ipfs /sbin/ipfstat /sbin/ipmon /sbin/ipnat /sbin/ippool"
+pkg39_name="FreeBSD-ipf"
+pkg39="ipf ipfs ipfstat ipmon ipnat ippool"
+pkg40_path="/sbin/dnctl /sbin/ipfw"
+pkg40_name="FreeBSD-ipfw"
+pkg40="dnctl ipfw"
+pkg41_path="/usr/bin/iscsictl /usr/sbin/ctladm /usr/sbin/ctld /usr/sbin/iscsid"
+pkg41_name="FreeBSD-iscsi"
+pkg41="iscsictl ctladm ctld iscsid"
+pkg42_path="/usr/sbin/jail /usr/sbin/jexec /usr/sbin/jls"
+pkg42_name="FreeBSD-jail"
+pkg42="jail jexec jls"
+pkg43_path="/usr/bin/asn1_compile /usr/bin/compile_et /usr/bin/hxtool /usr/bin/kadmin /usr/bin/kcc /usr/bin/kdestroy /usr/bin/kf /usr/bin/kgetcred /usr/bin/kinit /usr/bin/klist /usr/bin/kpasswd /usr/bin/krb5-config /usr/bin/ksu /usr/bin/kswitch /usr/bin/make-roken /usr/bin/slc /usr/bin/string2key /usr/bin/verify_krb5_conf /usr/libexec/digest-service /usr/libexec/hprop /usr/libexec/hpropd /usr/libexec/ipropd-master /usr/libexec/ipropd-slave /usr/libexec/kadmind /usr/libexec/kcm /usr/libexec/kdc /usr/libexec/kdigest /usr/libexec/kfd /usr/libexec/kimpersonate /usr/libexec/kpasswdd /usr/sbin/gssd /usr/sbin/iprop-log /usr/sbin/kstash /usr/sbin/ktutil"
+pkg43_name="FreeBSD-kerberos"
+pkg43="asn1_compile compile_et hxtool kadmin kcc kdestroy kf kgetcred kinit klist kpasswd krb5-config ksu kswitch make-roken slc string2key verify_krb5_conf digest-service hprop hpropd ipropd-master ipropd-slave kadmind kcm kdc kdigest kfd kimpersonate kpasswdd gssd iprop-log kstash ktutil"
+pkg44_path="/usr/bin/ld /usr/bin/ld.lld"
+pkg44_name="FreeBSD-lld"
+pkg44="ld ld.lld"
+pkg45_path="/usr/bin/lldb /usr/bin/lldb-server"
+pkg45_name="FreeBSD-lldb"
+pkg45="lldb lldb-server"
+pkg46_path="/usr/sbin/mtree /usr/sbin/nmtree"
+pkg46_name="FreeBSD-mtree"
+pkg46="mtree nmtree"
+pkg47_path="/usr/sbin/mlx5tool"
+pkg47_name="FreeBSD-mlx-tools"
+pkg47="mlx5tool"
+pkg48_path="/sbin/natd"
+pkg48_name="FreeBSD-natd"
+pkg48="natd"
+pkg49_path="/usr/sbin/valectl"
+pkg49_name="FreeBSD-netmap"
+pkg49="valectl"
+pkg50_path="/usr/sbin/newsyslog"
+pkg50_name="FreeBSD-newsyslog"
+pkg50="newsyslog"
+pkg51_path="/sbin/mount_nfs /sbin/nfsiod /usr/bin/nfsstat /usr/libexec/rpc.rquotad /usr/sbin/clear_locks /usr/sbin/nfscbd /usr/sbin/nfsd /usr/sbin/nfsdumpstate /usr/sbin/nfsrevoke /usr/sbin/nfsuserd /usr/sbin/pnfsdscopymr /usr/sbin/pnfsdsfile /usr/sbin/pnfsdskill /usr/sbin/rpc.lockd /usr/sbin/rpc.umntall"
+pkg51_name="FreeBSD-nfs"
+pkg51="mount_nfs nfsiod nfsstat rpc.rquotad clear_locks nfscbd nfsd nfsdumpstate nfsrevoke nfsuserd pnfsdscopymr pnfsdsfile pnfsdskill rpc.lockd rpc.umntall"
+pkg52_path="/sbin/nvmecontrol"
+pkg52_name="FreeBSD-nvme-tools"
+pkg52="nvmecontrol"
+pkg53_path="/usr/bin/openssl"
+pkg53_name="FreeBSD-openssl"
+pkg53="openssl"
+pkg54_path="/usr/sbin/periodic"
+pkg54_name="FreeBSD-periodic"
+pkg54="periodic"
+pkg55_path="/sbin/pfctl /sbin/pflogd /usr/sbin/ftp-proxy"
+pkg55_name="FreeBSD-pf"
+pkg55="pfctl pflogd ftp-proxy"
+pkg56_path="/usr/sbin/pkg"
+pkg56_name="FreeBSD-pkg-bootstrap"
+pkg56="pkg"
+pkg57_path="/usr/sbin/ppp /usr/sbin/pppctl"
+pkg57_name="FreeBSD-ppp"
+pkg57="ppp pppctl"
+pkg58_path="/sbin/quotacheck"
+pkg58_name="FreeBSD-quotacheck"
+pkg58="quotacheck"
+pkg59_path="/sbin/rcorder"
+pkg59_name="FreeBSD-rc"
+pkg59="rcorder"
+pkg60_path="/usr/bin/ruptime /usr/bin/rwho /usr/sbin/rwhod"
+pkg60_name="FreeBSD-rcmds"
+pkg60="ruptime rwho rwhod"
+pkg61_path="/usr/bin/ibv_asyncwatch /usr/bin/ibv_devices /usr/bin/ibv_devinfo /usr/bin/ibv_rc_pingpong /usr/bin/ibv_srq_pingpong /usr/bin/ibv_uc_pingpong /usr/bin/ibv_ud_pingpong /usr/bin/mckey /usr/bin/rping /usr/bin/ucmatose /usr/bin/udaddy"
+pkg61_name="FreeBSD-rdma"
+pkg61="ibv_asyncwatch ibv_devices ibv_devinfo ibv_rc_pingpong ibv_srq_pingpong ibv_uc_pingpong ibv_ud_pingpong mckey rping ucmatose udaddy"
+pkg62_path="/sbin/resolvconf"
+pkg62_name="FreeBSD-resolvconf"
+pkg62="resolvconf"
+pkg63_path="/bin/[ /bin/cat /bin/chflags /bin/chmod /bin/cp /bin/date /bin/dd /bin/df /bin/echo /bin/ed /bin/expr /bin/freebsd-version /bin/getfacl /bin/hostname /bin/kenv /bin/kill /bin/link /bin/ln /bin/ls /bin/mkdir /bin/mv /bin/nproc /bin/pax /bin/pgrep /bin/pkill /bin/ps /bin/pwait /bin/pwd /bin/realpath /bin/red /bin/rm /bin/rmdir /bin/setfacl /bin/sh /bin/sleep /bin/stty /bin/sync /bin/test /bin/unlink /sbin/adjkerntz /sbin/bsdlabel /sbin/camcontrol /sbin/comcontrol /sbin/conscontrol /sbin/ddb /sbin/devfs /sbin/disklabel /sbin/dmesg /sbin/dumpon /sbin/etherswitchcfg /sbin/fastboot /sbin/fasthalt /sbin/fdisk /sbin/fsck /sbin/fsck_msdosfs /sbin/halt /sbin/ifconfig /sbin/init /sbin/kldconfig /sbin/kldload /sbin/kldstat /sbin/kldunload /sbin/ldconfig /sbin/md5 /sbin/md5sum /sbin/mdconfig /sbin/mdmfs /sbin/mknod /sbin/mount /sbin/mount_cd9660 /sbin/mount_fusefs /sbin/mount_mfs /sbin/mount_msdosfs /sbin/mount_nullfs /sbin/mount_udf /sbin/mount_unionfs /sbin/newfs_msdos /sbin/nextboot /sbin/ping /sbin/ping6 /sbin/poweroff /sbin/reboot /sbin/recoverdisk /sbin/rmd160 /sbin/rmd160sum /sbin/route /sbin/routed /sbin/rtquery /sbin/rtsol /sbin/savecore /sbin/sha1 /sbin/sha1sum /sbin/sha224 /sbin/sha224sum /sbin/sha256 /sbin/sha256sum /sbin/sha384 /sbin/sha384sum /sbin/sha512 /sbin/sha512sum /sbin/sha512t224 /sbin/sha512t224sum /sbin/sha512t256 /sbin/sha512t256sum /sbin/shutdown /sbin/skein1024 /sbin/skein1024sum /sbin/skein256 /sbin/skein256sum /sbin/skein512 /sbin/skein512sum /sbin/swapctl /sbin/swapoff /sbin/swapon /sbin/sysctl /sbin/umount /usr/bin/bsdtar /usr/bin/bzegrep /usr/bin/bzfgrep /usr/bin/bzgrep /usr/bin/bzless /usr/bin/captoinfo /usr/bin/clear /usr/bin/du /usr/bin/egrep /usr/bin/env /usr/bin/fgrep /usr/bin/find /usr/bin/fsync /usr/bin/grep /usr/bin/groups /usr/bin/id /usr/bin/infocmp /usr/bin/infotocap /usr/bin/install /usr/bin/less /usr/bin/lesspipe.sh /usr/bin/limits /usr/bin/logger /usr/bin/login /usr/bin/lzegrep /usr/bin/lzfgrep /usr/bin/lzgrep /usr/bin/lzless /usr/bin/mktemp /usr/bin/more /usr/bin/passwd /usr/bin/pgrep /usr/bin/pkill /usr/bin/reset /usr/bin/rgrep /usr/bin/sed /usr/bin/sort /usr/bin/tabs /usr/bin/tar /usr/bin/tic /usr/bin/toe /usr/bin/tput /usr/bin/tset /usr/bin/uname /usr/bin/what /usr/bin/whoami /usr/bin/xargs /usr/bin/xzegrep /usr/bin/xzfgrep /usr/bin/xzgrep /usr/bin/xzless /usr/bin/yppasswd /usr/bin/zegrep /usr/bin/zfgrep /usr/bin/zgrep /usr/bin/zless /usr/bin/zstdegrep /usr/bin/zstdfgrep /usr/bin/zstdgrep /usr/bin/zstdless /usr/libexec/getty /usr/sbin/ip6addrctl /usr/sbin/kldxref /usr/sbin/pw /usr/sbin/pwd_mkdb /usr/sbin/service /usr/sbin/services_mkdb /usr/sbin/traceroute /usr/sbin/traceroute6"
+pkg63_name="FreeBSD-runtime"
+pkg63="[ cat chflags chmod cp date dd df echo ed expr freebsd-version getfacl hostname kenv kill link ln ls mkdir mv nproc pax pgrep pkill ps pwait pwd realpath red rm rmdir setfacl sh sleep stty sync test unlink adjkerntz bsdlabel camcontrol comcontrol conscontrol ddb devfs disklabel dmesg dumpon etherswitchcfg fastboot fasthalt fdisk fsck fsck_msdosfs halt ifconfig init kldconfig kldload kldstat kldunload ldconfig md5 md5sum mdconfig mdmfs mknod mount mount_cd9660 mount_fusefs mount_mfs mount_msdosfs mount_nullfs mount_udf mount_unionfs newfs_msdos nextboot ping ping6 poweroff reboot recoverdisk rmd160 rmd160sum route routed rtquery rtsol savecore sha1 sha1sum sha224 sha224sum sha256 sha256sum sha384 sha384sum sha512 sha512sum sha512t224 sha512t224sum sha512t256 sha512t256sum shutdown skein1024 skein1024sum skein256 skein256sum skein512 skein512sum swapctl swapoff swapon sysctl umount bsdtar bzegrep bzfgrep bzgrep bzless captoinfo clear du egrep env fgrep find fsync grep groups id infocmp infotocap install less lesspipe.sh limits logger login lzegrep lzfgrep lzgrep lzless mktemp more passwd pgrep pkill reset rgrep sed sort tabs tar tic toe tput tset uname what whoami xargs xzegrep xzfgrep xzgrep xzless yppasswd zegrep zfgrep zgrep zless zstdegrep zstdfgrep zstdgrep zstdless getty ip6addrctl kldxref pw pwd_mkdb service services_mkdb traceroute traceroute6"
+pkg64_path="/bin/rmail /usr/libexec/mail.local /usr/libexec/sendmail/sendmail /usr/libexec/smrsh"
+pkg64_name="FreeBSD-sendmail"
+pkg64="rmail mail.local sendmail smrsh"
+pkg65_path="/usr/bin/smbutil /usr/sbin/mount_smbfs"
+pkg65_name="FreeBSD-smbutils"
+pkg65="smbutil mount_smbfs"
+pkg66_path="/usr/bin/scp /usr/bin/sftp /usr/bin/slogin /usr/bin/ssh /usr/bin/ssh-add /usr/bin/ssh-agent /usr/bin/ssh-copy-id /usr/bin/ssh-keygen /usr/bin/ssh-keyscan /usr/libexec/sftp-server /usr/libexec/ssh-keysign /usr/libexec/ssh-pkcs11-helper /usr/libexec/ssh-sk-helper /usr/sbin/sshd"
+pkg66_name="FreeBSD-ssh"
+pkg66="scp sftp slogin ssh ssh-add ssh-agent ssh-copy-id ssh-keygen ssh-keyscan sftp-server ssh-keysign ssh-pkcs11-helper ssh-sk-helper sshd"
+pkg67_path="/usr/sbin/syslogd"
+pkg67_name="FreeBSD-syslogd"
+pkg67="syslogd"
+pkg68_path="/usr/libexec/tcpd /usr/sbin/tcpdchk /usr/sbin/tcpdmatch"
+pkg68_name="FreeBSD-tcpd"
+pkg68="tcpd tcpdchk tcpdmatch"
+pkg69_path="/usr/bin/telnet"
+pkg69_name="FreeBSD-telnet"
+pkg69="telnet"
+pkg70_path="/usr/bin/kyua /usr/libexec/atf-check /usr/libexec/atf-sh /usr/libexec/atf_pytest_wrapper"
+pkg70_name="FreeBSD-tests"
+pkg70="kyua atf-check atf-sh atf_pytest_wrapper"
+pkg71_path="/sbin/clri /sbin/dump /sbin/dumpfs /sbin/ffsinfo /sbin/fsck_4.2bsd /sbin/fsck_ffs /sbin/fsck_ufs /sbin/fsdb /sbin/fsirand /sbin/growfs /sbin/mksnap_ffs /sbin/newfs /sbin/rdump /sbin/restore /sbin/rrestore /sbin/tunefs /usr/sbin/snapinfo"
+pkg71_name="FreeBSD-ufs"
+pkg71="clri dump dumpfs ffsinfo fsck_4.2bsd fsck_ffs fsck_ufs fsdb fsirand growfs mksnap_ffs newfs rdump restore rrestore tunefs snapinfo"
+pkg72_path="/usr/sbin/local-unbound /usr/sbin/local-unbound-anchor /usr/sbin/local-unbound-checkconf /usr/sbin/local-unbound-control /usr/sbin/local-unbound-setup"
+pkg72_name="FreeBSD-unbound"
+pkg72="local-unbound local-unbound-anchor local-unbound-checkconf local-unbound-control local-unbound-setup"
+pkg73_path="/bin/chio /bin/timeout /bin/uuidgen /sbin/decryptcore /sbin/nologin /sbin/nos-tun /sbin/pfilctl /sbin/setkey /sbin/zfsbootcfg /usr/bin/Mail /usr/bin/alias /usr/bin/apply /usr/bin/apropos /usr/bin/ar /usr/bin/asa /usr/bin/awk /usr/bin/b64decode /usr/bin/b64encode /usr/bin/backlight /usr/bin/banner /usr/bin/base64 /usr/bin/basename /usr/bin/bc /usr/bin/beep /usr/bin/bg /usr/bin/biff /usr/bin/bintrans /usr/bin/bmake /usr/bin/brandelf /usr/bin/bsdcat /usr/bin/bsdcpio /usr/bin/bsddialog /usr/bin/bsdiff /usr/bin/bspatch /usr/bin/bunzip2 /usr/bin/byacc /usr/bin/bzcat /usr/bin/bzip2 /usr/bin/bzip2recover /usr/bin/c89 /usr/bin/c99 /usr/bin/cal /usr/bin/calendar /usr/bin/cap_mkdb /usr/bin/cd /usr/bin/chat /usr/bin/chfn /usr/bin/chgrp /usr/bin/chkey /usr/bin/chpass /usr/bin/chsh /usr/bin/cksum /usr/bin/cmp /usr/bin/col /usr/bin/colrm /usr/bin/column /usr/bin/comm /usr/bin/command /usr/bin/compress /usr/bin/cpio /usr/bin/cpuset /usr/bin/crontab /usr/bin/crunchgen /usr/bin/crunchide /usr/bin/crypt /usr/bin/csplit /usr/bin/ctags /usr/bin/ctlstat /usr/bin/cu /usr/bin/cut /usr/bin/dc /usr/bin/dialog /usr/bin/diff /usr/bin/diff3 /usr/bin/dirname /usr/bin/drill /usr/bin/dtc /usr/bin/elfctl /usr/bin/elfdump /usr/bin/enigma /usr/bin/etdump /usr/bin/expand /usr/bin/factor /usr/bin/false /usr/bin/fc /usr/bin/fg /usr/bin/file /usr/bin/file2c /usr/bin/finger /usr/bin/flex /usr/bin/flex++ /usr/bin/fmt /usr/bin/fold /usr/bin/fortune /usr/bin/from /usr/bin/fstat /usr/bin/fuser /usr/bin/gcore /usr/bin/gencat /usr/bin/genl /usr/bin/getaddrinfo /usr/bin/getconf /usr/bin/getent /usr/bin/getopt /usr/bin/getopts /usr/bin/gprof /usr/bin/gunzip /usr/bin/gzcat /usr/bin/gzexe /usr/bin/gzip /usr/bin/hash /usr/bin/hd /usr/bin/head /usr/bin/hexdump /usr/bin/host /usr/bin/ibstat /usr/bin/iconv /usr/bin/ident /usr/bin/indent /usr/bin/ipcrm /usr/bin/ipcs /usr/bin/jobs /usr/bin/join /usr/bin/jot /usr/bin/kdump /usr/bin/keylogin /usr/bin/keylogout /usr/bin/killall /usr/bin/ktrace /usr/bin/ktrdump /usr/bin/lam /usr/bin/ldd /usr/bin/ldd32 /usr/bin/leave /usr/bin/lessecho /usr/bin/lesskey /usr/bin/lex /usr/bin/lex++ /usr/bin/locale /usr/bin/localedef /usr/bin/locate /usr/bin/lock /usr/bin/lockf /usr/bin/logins /usr/bin/logname /usr/bin/look /usr/bin/lorder /usr/bin/lp /usr/bin/lpq /usr/bin/lpr /usr/bin/lprm /usr/bin/lsvfs /usr/bin/lzcat /usr/bin/lzdec /usr/bin/lzma /usr/bin/lzmainfo /usr/bin/m4 /usr/bin/mail /usr/bin/mailq /usr/bin/mailx /usr/bin/make /usr/bin/makewhatis /usr/bin/man /usr/bin/mandoc /usr/bin/manpath /usr/bin/mesg /usr/bin/ministat /usr/bin/mkcsmapper /usr/bin/mkdep /usr/bin/mkesdb /usr/bin/mkfifo /usr/bin/mkimg /usr/bin/mkstr /usr/bin/mkuzip /usr/bin/morse /usr/bin/msgs /usr/bin/mt /usr/bin/nawk /usr/bin/nc /usr/bin/ncal /usr/bin/netstat /usr/bin/newaliases /usr/bin/newgrp /usr/bin/newkey /usr/bin/nice /usr/bin/nl /usr/bin/nohup /usr/bin/ntpq /usr/bin/number /usr/bin/od /usr/bin/pagesize /usr/bin/pargs /usr/bin/paste /usr/bin/patch /usr/bin/pathchk /usr/bin/penv /usr/bin/perror /usr/bin/pmcstudy /usr/bin/posixshmcontrol /usr/bin/pr /usr/bin/primes /usr/bin/printenv /usr/bin/printf /usr/bin/proccontrol /usr/bin/procstat /usr/bin/protect /usr/bin/pwdx /usr/bin/quota /usr/bin/random /usr/bin/ranlib /usr/bin/rctl /usr/bin/read /usr/bin/readlink /usr/bin/renice /usr/bin/resizewin /usr/bin/rev /usr/bin/revoke /usr/bin/rpcgen /usr/bin/rpcinfo /usr/bin/rs /usr/bin/rup /usr/bin/rusers /usr/bin/rwall /usr/bin/script /usr/bin/sdiff /usr/bin/seq /usr/bin/shar /usr/bin/showmount /usr/bin/sockstat /usr/bin/soelim /usr/bin/split /usr/bin/stat /usr/bin/stdbuf /usr/bin/strfile /usr/bin/strings /usr/bin/su /usr/bin/sum /usr/bin/systat /usr/bin/tail /usr/bin/talk /usr/bin/tcopy /usr/bin/tee /usr/bin/tftp /usr/bin/time /usr/bin/timeout /usr/bin/tip /usr/bin/top /usr/bin/touch /usr/bin/tr /usr/bin/true /usr/bin/truncate /usr/bin/truss /usr/bin/tsort /usr/bin/tty /usr/bin/type /usr/bin/ul /usr/bin/ulimit /usr/bin/umask /usr/bin/unalias /usr/bin/uncompress /usr/bin/unexpand /usr/bin/unifdef /usr/bin/unifdefall /usr/bin/uniq /usr/bin/units /usr/bin/unlzma /usr/bin/unstr /usr/bin/unvis /usr/bin/unxz /usr/bin/unzip /usr/bin/unzstd /usr/bin/uptime /usr/bin/usbhidaction /usr/bin/usbhidctl /usr/bin/uudecode /usr/bin/uuencode /usr/bin/vacation /usr/bin/vis /usr/bin/vmstat /usr/bin/vtfontcvt /usr/bin/w /usr/bin/wait /usr/bin/wall /usr/bin/wc /usr/bin/wg /usr/bin/whatis /usr/bin/whereis /usr/bin/which /usr/bin/whois /usr/bin/write /usr/bin/xo /usr/bin/xstr /usr/bin/xz /usr/bin/xzcat /usr/bin/xzdec /usr/bin/xzdiff /usr/bin/yacc /usr/bin/yes /usr/bin/ypchfn /usr/bin/ypchpass /usr/bin/ypchsh /usr/bin/zcat /usr/bin/zcmp /usr/bin/zdiff /usr/bin/zforce /usr/bin/zmore /usr/bin/znew /usr/bin/zstd /usr/bin/zstdcat /usr/bin/zstdmt /usr/libexec/blacklistd-helper /usr/libexec/bootpd /usr/libexec/bootpgw /usr/libexec/bsdconfig/020.docsinstall/INDEX /usr/libexec/bsdconfig/020.docsinstall/USAGE /usr/libexec/bsdconfig/020.docsinstall/docsinstall /usr/libexec/bsdconfig/020.docsinstall/include/messages.subr /usr/libexec/bsdconfig/030.packages/INDEX /usr/libexec/bsdconfig/030.packages/USAGE /usr/libexec/bsdconfig/030.packages/include/messages.subr /usr/libexec/bsdconfig/030.packages/packages /usr/libexec/bsdconfig/040.password/INDEX /usr/libexec/bsdconfig/040.password/USAGE /usr/libexec/bsdconfig/040.password/include/messages.subr /usr/libexec/bsdconfig/040.password/password /usr/libexec/bsdconfig/050.diskmgmt/INDEX /usr/libexec/bsdconfig/050.diskmgmt/USAGE /usr/libexec/bsdconfig/050.diskmgmt/diskmgmt /usr/libexec/bsdconfig/050.diskmgmt/include/messages.subr /usr/libexec/bsdconfig/070.usermgmt/INDEX /usr/libexec/bsdconfig/070.usermgmt/USAGE /usr/libexec/bsdconfig/070.usermgmt/groupadd /usr/libexec/bsdconfig/070.usermgmt/groupdel /usr/libexec/bsdconfig/070.usermgmt/groupedit /usr/libexec/bsdconfig/070.usermgmt/include/messages.subr /usr/libexec/bsdconfig/070.usermgmt/include/usermgmt.hlp /usr/libexec/bsdconfig/070.usermgmt/useradd /usr/libexec/bsdconfig/070.usermgmt/userdel /usr/libexec/bsdconfig/070.usermgmt/useredit /usr/libexec/bsdconfig/070.usermgmt/usermgmt /usr/libexec/bsdconfig/080.console/INDEX /usr/libexec/bsdconfig/080.console/USAGE /usr/libexec/bsdconfig/080.console/console /usr/libexec/bsdconfig/080.console/font /usr/libexec/bsdconfig/080.console/include/messages.subr /usr/libexec/bsdconfig/080.console/keymap /usr/libexec/bsdconfig/080.console/repeat /usr/libexec/bsdconfig/080.console/saver /usr/libexec/bsdconfig/080.console/screenmap /usr/libexec/bsdconfig/080.console/ttys /usr/libexec/bsdconfig/090.timezone/INDEX /usr/libexec/bsdconfig/090.timezone/USAGE /usr/libexec/bsdconfig/090.timezone/include/messages.subr /usr/libexec/bsdconfig/090.timezone/timezone /usr/libexec/bsdconfig/110.mouse/INDEX /usr/libexec/bsdconfig/110.mouse/USAGE /usr/libexec/bsdconfig/110.mouse/disable /usr/libexec/bsdconfig/110.mouse/enable /usr/libexec/bsdconfig/110.mouse/flags /usr/libexec/bsdconfig/110.mouse/include/messages.subr /usr/libexec/bsdconfig/110.mouse/mouse /usr/libexec/bsdconfig/110.mouse/port /usr/libexec/bsdconfig/110.mouse/type /usr/libexec/bsdconfig/120.networking/INDEX /usr/libexec/bsdconfig/120.networking/USAGE /usr/libexec/bsdconfig/120.networking/defaultrouter /usr/libexec/bsdconfig/120.networking/devices /usr/libexec/bsdconfig/120.networking/hostname /usr/libexec/bsdconfig/120.networking/include/messages.subr /usr/libexec/bsdconfig/120.networking/nameservers /usr/libexec/bsdconfig/120.networking/networking /usr/libexec/bsdconfig/120.networking/wlanconfig /usr/libexec/bsdconfig/130.security/INDEX /usr/libexec/bsdconfig/130.security/USAGE /usr/libexec/bsdconfig/130.security/include/messages.subr /usr/libexec/bsdconfig/130.security/include/securelevel.hlp /usr/libexec/bsdconfig/130.security/kern_securelevel /usr/libexec/bsdconfig/130.security/security /usr/libexec/bsdconfig/140.startup/INDEX /usr/libexec/bsdconfig/140.startup/USAGE /usr/libexec/bsdconfig/140.startup/include/messages.subr /usr/libexec/bsdconfig/140.startup/misc /usr/libexec/bsdconfig/140.startup/rcadd /usr/libexec/bsdconfig/140.startup/rcconf /usr/libexec/bsdconfig/140.startup/rcdelete /usr/libexec/bsdconfig/140.startup/rcedit /usr/libexec/bsdconfig/140.startup/rcvar /usr/libexec/bsdconfig/140.startup/startup /usr/libexec/bsdconfig/150.ttys/INDEX /usr/libexec/bsdconfig/150.ttys/USAGE /usr/libexec/bsdconfig/150.ttys/include/messages.subr /usr/libexec/bsdconfig/150.ttys/ttys /usr/libexec/bsdconfig/USAGE /usr/libexec/bsdconfig/dot/INDEX /usr/libexec/bsdconfig/dot/USAGE /usr/libexec/bsdconfig/dot/dot /usr/libexec/bsdconfig/dot/include/messages.subr /usr/libexec/bsdconfig/include/bsdconfig.hlp /usr/libexec/bsdconfig/include/media.hlp /usr/libexec/bsdconfig/include/messages.subr /usr/libexec/bsdconfig/include/network_device.hlp /usr/libexec/bsdconfig/include/options.hlp /usr/libexec/bsdconfig/include/tcp.hlp /usr/libexec/bsdconfig/include/usage.hlp /usr/libexec/bsdconfig/includes/INDEX /usr/libexec/bsdconfig/includes/USAGE /usr/libexec/bsdconfig/includes/include/messages.subr /usr/libexec/bsdconfig/includes/includes /usr/libexec/comsat /usr/libexec/fingerd /usr/libexec/flua /usr/libexec/locate.bigram /usr/libexec/locate.code /usr/libexec/locate.concatdb /usr/libexec/locate.mklocatedb /usr/libexec/locate.updatedb /usr/libexec/lpr/lpf /usr/libexec/lpr/ru/bjc-240.sh.sample /usr/libexec/lpr/ru/koi2855 /usr/libexec/lpr/ru/koi2alt /usr/libexec/makewhatis.local /usr/libexec/mknetid /usr/libexec/ntalkd /usr/libexec/phttpget /usr/libexec/pppoed /usr/libexec/rbootd /usr/libexec/revnetgroup /usr/libexec/rpc.rstatd /usr/libexec/rpc.rusersd /usr/libexec/rpc.rwalld /usr/libexec/rpc.sprayd /usr/libexec/save-entropy /usr/libexec/tftp-proxy /usr/libexec/tftpd /usr/libexec/ulog-helper /usr/libexec/zfs/zpool_influxdb /usr/sbin/adduser /usr/sbin/arp /usr/sbin/audit /usr/sbin/auditd /usr/sbin/auditdistd /usr/sbin/auditreduce /usr/sbin/authpf /usr/sbin/authpf-noip /usr/sbin/binmiscctl /usr/sbin/blacklistctl /usr/sbin/blacklistd /usr/sbin/boot0cfg /usr/sbin/bootparamd /usr/sbin/bootpef /usr/sbin/bootptest /usr/sbin/boottrace /usr/sbin/bsdconfig /usr/sbin/btxld /usr/sbin/callbootd /usr/sbin/camdd /usr/sbin/cdcontrol /usr/sbin/chkgrp /usr/sbin/chkprintcap /usr/sbin/chown /usr/sbin/chroot /usr/sbin/ckdist /usr/sbin/config /usr/sbin/cpucontrol /usr/sbin/crashinfo /usr/sbin/cron /usr/sbin/daemon /usr/sbin/dconschat /usr/sbin/devctl /usr/sbin/diskinfo /usr/sbin/dumpcis /usr/sbin/editmap /usr/sbin/edquota /usr/sbin/etcupdate /usr/sbin/extattrctl /usr/sbin/fdcontrol /usr/sbin/fdformat /usr/sbin/fdread /usr/sbin/fdwrite /usr/sbin/fifolog_create /usr/sbin/fifolog_reader /usr/sbin/fifolog_writer /usr/sbin/flowctl /usr/sbin/freebsd-update /usr/sbin/fstyp /usr/sbin/fwcontrol /usr/sbin/getextattr /usr/sbin/getfmac /usr/sbin/getpmac /usr/sbin/gpioctl /usr/sbin/gstat /usr/sbin/hoststat /usr/sbin/hv_kvp_daemon /usr/sbin/hv_vss_daemon /usr/sbin/i2c /usr/sbin/idprio /usr/sbin/ifmcstat /usr/sbin/iostat /usr/sbin/iovctl /usr/sbin/ipfwpcap /usr/sbin/keyserv /usr/sbin/lpc /usr/sbin/lpd /usr/sbin/lptcontrol /usr/sbin/lptest /usr/sbin/lsextattr /usr/sbin/mailstats /usr/sbin/mailwrapper /usr/sbin/makefs /usr/sbin/makemap /usr/sbin/manctl /usr/sbin/memcontrol /usr/sbin/mergemaster /usr/sbin/mfiutil /usr/sbin/mixer /usr/sbin/mld6query /usr/sbin/mlxcontrol /usr/sbin/mountd /usr/sbin/mprutil /usr/sbin/mpsutil /usr/sbin/mptable /usr/sbin/mptutil /usr/sbin/mrsasutil /usr/sbin/mtest /usr/sbin/ndp /usr/sbin/ngctl /usr/sbin/nghook /usr/sbin/nologin /usr/sbin/nscd /usr/sbin/ntp-keygen /usr/sbin/ntpd /usr/sbin/ntpdate /usr/sbin/ntpdc /usr/sbin/ntptime /usr/sbin/pac /usr/sbin/pciconf /usr/sbin/pmc /usr/sbin/pmcannotate /usr/sbin/pmccontrol /usr/sbin/pmcstat /usr/sbin/powerd /usr/sbin/praliases /usr/sbin/praudit /usr/sbin/prometheus_sysctl_exporter /usr/sbin/pstat /usr/sbin/purgestat /usr/sbin/pwm /usr/sbin/quot /usr/sbin/quotaoff /usr/sbin/quotaon /usr/sbin/rarpd /usr/sbin/repquota /usr/sbin/rip6query /usr/sbin/rmextattr /usr/sbin/rmt /usr/sbin/rmuser /usr/sbin/route6d /usr/sbin/rpc.statd /usr/sbin/rpc.tlsclntd /usr/sbin/rpc.tlsservd /usr/sbin/rpcbind /usr/sbin/rrenumd /usr/sbin/rtadvctl /usr/sbin/rtadvd /usr/sbin/rtprio /usr/sbin/rtsold /usr/sbin/sendmail /usr/sbin/sesutil /usr/sbin/setextattr /usr/sbin/setfib /usr/sbin/setfmac /usr/sbin/setfsmac /usr/sbin/setpmac /usr/sbin/smbmsg /usr/sbin/sntp /usr/sbin/spi /usr/sbin/spkrtest /usr/sbin/spray /usr/sbin/swapinfo /usr/sbin/sysrc /usr/sbin/tcpdrop /usr/sbin/tcpdump /usr/sbin/tcpsso /usr/sbin/trim /usr/sbin/tzsetup /usr/sbin/uathload /usr/sbin/uefisign /usr/sbin/ugidfw /usr/sbin/uhsoctl /usr/sbin/usbconfig /usr/sbin/usbdump /usr/sbin/vigr /usr/sbin/vipw /usr/sbin/wake /usr/sbin/watch /usr/sbin/watchdog /usr/sbin/watchdogd /usr/sbin/wlandebug /usr/sbin/zdump /usr/sbin/zic /usr/sbin/zonectl /usr/sbin/zzz"
+pkg73_name="FreeBSD-utilities"
+pkg73="chio timeout uuidgen decryptcore nologin nos-tun pfilctl setkey zfsbootcfg Mail alias apply apropos ar asa awk b64decode b64encode backlight banner base64 basename bc beep bg biff bintrans bmake brandelf bsdcat bsdcpio bsddialog bsdiff bspatch bunzip2 byacc bzcat bzip2 bzip2recover c89 c99 cal calendar cap_mkdb cd chat chfn chgrp chkey chpass chsh cksum cmp col colrm column comm command compress cpio cpuset crontab crunchgen crunchide crypt csplit ctags ctlstat cu cut dc dialog diff diff3 dirname drill dtc elfctl elfdump enigma etdump expand factor false fc fg file file2c finger flex flex++ fmt fold fortune from fstat fuser gcore gencat genl getaddrinfo getconf getent getopt getopts gprof gunzip gzcat gzexe gzip hash hd head hexdump host ibstat iconv ident indent ipcrm ipcs jobs join jot kdump keylogin keylogout killall ktrace ktrdump lam ldd ldd32 leave lessecho lesskey lex lex++ locale localedef locate lock lockf logins logname look lorder lp lpq lpr lprm lsvfs lzcat lzdec lzma lzmainfo m4 mail mailq mailx make makewhatis man mandoc manpath mesg ministat mkcsmapper mkdep mkesdb mkfifo mkimg mkstr mkuzip morse msgs mt nawk nc ncal netstat newaliases newgrp newkey nice nl nohup ntpq number od pagesize pargs paste patch pathchk penv perror pmcstudy posixshmcontrol pr primes printenv printf proccontrol procstat protect pwdx quota random ranlib rctl read readlink renice resizewin rev revoke rpcgen rpcinfo rs rup rusers rwall script sdiff seq shar showmount sockstat soelim split stat stdbuf strfile strings su sum systat tail talk tcopy tee tftp time timeout tip top touch tr true truncate truss tsort tty type ul ulimit umask unalias uncompress unexpand unifdef unifdefall uniq units unlzma unstr unvis unxz unzip unzstd uptime usbhidaction usbhidctl uudecode uuencode vacation vis vmstat vtfontcvt w wait wall wc wg whatis whereis which whois write xo xstr xz xzcat xzdec xzdiff yacc yes ypchfn ypchpass ypchsh zcat zcmp zdiff zforce zmore znew zstd zstdcat zstdmt blacklistd-helper bootpd bootpgw INDEX USAGE docsinstall messages.subr INDEX USAGE messages.subr packages INDEX USAGE messages.subr password INDEX USAGE diskmgmt messages.subr INDEX USAGE groupadd groupdel groupedit messages.subr usermgmt.hlp useradd userdel useredit usermgmt INDEX USAGE console font messages.subr keymap repeat saver screenmap ttys INDEX USAGE messages.subr timezone INDEX USAGE disable enable flags messages.subr mouse port type INDEX USAGE defaultrouter devices hostname messages.subr nameservers networking wlanconfig INDEX USAGE messages.subr securelevel.hlp kern_securelevel security INDEX USAGE messages.subr misc rcadd rcconf rcdelete rcedit rcvar startup INDEX USAGE messages.subr ttys USAGE INDEX USAGE dot messages.subr bsdconfig.hlp media.hlp messages.subr network_device.hlp options.hlp tcp.hlp usage.hlp INDEX USAGE messages.subr includes comsat fingerd flua locate.bigram locate.code locate.concatdb locate.mklocatedb locate.updatedb lpf bjc-240.sh.sample koi2855 koi2alt makewhatis.local mknetid ntalkd phttpget pppoed rbootd revnetgroup rpc.rstatd rpc.rusersd rpc.rwalld rpc.sprayd save-entropy tftp-proxy tftpd ulog-helper zpool_influxdb adduser arp audit auditd auditdistd auditreduce authpf authpf-noip binmiscctl blacklistctl blacklistd boot0cfg bootparamd bootpef bootptest boottrace bsdconfig btxld callbootd camdd cdcontrol chkgrp chkprintcap chown chroot ckdist config cpucontrol crashinfo cron daemon dconschat devctl diskinfo dumpcis editmap edquota etcupdate extattrctl fdcontrol fdformat fdread fdwrite fifolog_create fifolog_reader fifolog_writer flowctl freebsd-update fstyp fwcontrol getextattr getfmac getpmac gpioctl gstat hoststat hv_kvp_daemon hv_vss_daemon i2c idprio ifmcstat iostat iovctl ipfwpcap keyserv lpc lpd lptcontrol lptest lsextattr mailstats mailwrapper makefs makemap manctl memcontrol mergemaster mfiutil mixer mld6query mlxcontrol mountd mprutil mpsutil mptable mptutil mrsasutil mtest ndp ngctl nghook nologin nscd ntp-keygen ntpd ntpdate ntpdc ntptime pac pciconf pmc pmcannotate pmccontrol pmcstat powerd praliases praudit prometheus_sysctl_exporter pstat purgestat pwm quot quotaoff quotaon rarpd repquota rip6query rmextattr rmt rmuser route6d rpc.statd rpc.tlsclntd rpc.tlsservd rpcbind rrenumd rtadvctl rtadvd rtprio rtsold sendmail sesutil setextattr setfib setfmac setfsmac setpmac smbmsg sntp spi spkrtest spray swapinfo sysrc tcpdrop tcpdump tcpsso trim tzsetup uathload uefisign ugidfw uhsoctl usbconfig usbdump vigr vipw wake watch watchdog watchdogd wlandebug zdump zic zonectl zzz"
+pkg74_path="/usr/bin/ex /usr/bin/nex /usr/bin/nvi /usr/bin/nview /usr/bin/vi /usr/bin/view"
+pkg74_name="FreeBSD-vi"
+pkg74="ex nex nvi nview vi view"
+pkg75_path="/usr/sbin/wpa_cli /usr/sbin/wpa_passphrase /usr/sbin/wpa_supplicant"
+pkg75_name="FreeBSD-wpa"
+pkg75="wpa_cli wpa_passphrase wpa_supplicant"
+pkg76_path="/bin/domainname /usr/bin/ypcat /usr/bin/ypmatch /usr/bin/ypwhich /usr/libexec/yppwupdate /usr/libexec/ypxfr /usr/sbin/rpc.yppasswdd /usr/sbin/rpc.ypupdated /usr/sbin/rpc.ypxfrd /usr/sbin/yp_mkdb /usr/sbin/ypbind /usr/sbin/ypinit /usr/sbin/ypldap /usr/sbin/yppoll /usr/sbin/yppush /usr/sbin/ypserv /usr/sbin/ypset"
+pkg76_name="FreeBSD-yp"
+pkg76="domainname ypcat ypmatch ypwhich yppwupdate ypxfr rpc.yppasswdd rpc.ypupdated rpc.ypxfrd yp_mkdb ypbind ypinit ypldap yppoll yppush ypserv ypset"
+pkg77_path="/sbin/bectl /sbin/zfs /sbin/zpool /usr/bin/zinject /usr/bin/zstream /usr/bin/zstreamdump /usr/bin/ztest /usr/sbin/zdb /usr/sbin/zfsd /usr/sbin/zhack"
+pkg77_name="FreeBSD-zfs"
+pkg77="bectl zfs zpool zinject zstream zstreamdump ztest zdb zfsd zhack"
+
+get_package_name()
+{
+	local _query _params _pkg i j _num
+
+	_query="${1}"
+
+	for i in ${full_packages}; do
+		eval _params="\$${i}"
+		for j in ${_params}; do
+			if [ "${j}" = "${_query}" ]; then
+				eval _pkg="\$${i}_name"
+				printf "${_pkg}"
+				return 0
+			fi
+		done
+	done
+}
+
+
+init()
+{
+	local _base=
+	_base="${1}"
+
+	[ -z "${_base}" ] && return 1
+	cd ${_base} || return 1 
+
+	for i in ${full_packages}; do
+		eval _params="\$${i}"
+		for j in ${_params}; do
+			eval _pkg="\$${i}_path"
+			for x in ${_pkg}; do
+				if [ ! -r "${_base}${x}" ]; then
+					echo "ln -s /bin/distribution ${_base}${x}"
+					ln -s /bin/distribution ${_base}${x}
+				fi
+			done
+		done
+	done
+}
+
+if [ -n "${1}" ]; then
+	query="${1}"
+else
+	query="${pgm}"
+fi
+
+case "${query}" in
+	init)
+		base="${2}"
+		init "${base}"
+		;;
+	distribution)
+		for i in ${full_packages}; do
+			eval _pkg="\$${i}_name"
+			printf "${_pkg}\n"
+		done
+		;;
+	*)
+		if pkg=$( get_package_name "${query}" 2>/dev/null ); then
+			echo "Not found: [${query}]" >> /tmp/not_found.log
+			if [ ${jailed} -eq 0 ]; then
+				printf "Command '${query}' not found, but can be installed with:\npkg install -y ${pkg}\n"
+			else
+				printf "Command '${query}' not found, but can be re-installed from CBSD host via:\ncbsd install-pkg-world packages=\"${pkg}\"\n"
+			fi
+		fi
+		;;
+esac
+
+exit 0

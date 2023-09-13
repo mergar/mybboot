@@ -1,0 +1,23 @@
+#!/bin/sh
+
+[ -z "${1}" ] && exit 0
+module="${1}"
+MY_ORIGIN=$( kenv mfsbsd.origin_site )
+if [ -z "${MY_ORIGIN}" ]; then
+        echo "no mfsbsd.origin_site"
+        exit 1
+fi
+
+MYREL=$( uname -sr | tr " " "-" )
+echo $MYREL
+URL="${MY_ORIGIN}/kernel/${MYREL}/${module}"
+echo "fetch ${URL}.."
+fetch -o /tmp/${1} ${URL}
+ret=$?
+if [ ${ret} -eq 0 ]; then
+	kldload /tmp/${1}
+	ret=$?
+	rm -f /tmp/${1}
+fi
+
+exit ${ret}
